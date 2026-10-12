@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cursor-tracking portfolio
 
-## Getting Started
+A personal portfolio whose hero character follows your mouse: head, eyes, brows and hair turn toward the cursor. Built with **Next.js 16**, **Tailwind CSS v4** and **GSAP**.
 
-First, run the development server:
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Make it yours
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything personal is in **`src/content/profile.ts`**: name, role, tagline, email, socials, about text, stats, skills, experience, projects, and the character's colours (`skin`, `hair`, `eyes`, `shirt`, and `hairStyle: "long" | "short"`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Resume:** put your PDF at `public/resume.pdf`, or set `resumeUrl` to any link.
+- **Contact form:** copy `.env.example` to `.env.local` and add a [Resend](https://resend.com) API key and your inbox address. Until then, the form politely offers a mailto link instead.
 
-## Learn More
+## How the character works
 
-To learn more about Next.js, take a look at the following resources:
+`src/components/character.tsx` draws the character as layered SVG. On every pointer move, GSAP `quickTo` shifts each layer by a different amount toward the cursor:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Layer       | Moves                       |
+| ----------- | --------------------------- |
+| Features    | most (eyes, nose, mouth)    |
+| Irises      | extra, clipped inside the eyes |
+| Head        | less, plus a small tilt     |
+| Ears, back hair | the opposite way        |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+That difference in movement makes a flat drawing read as a head turning in 3D. The character also blinks at random intervals, breathes, looks around on its own after a few idle seconds, raises its brows when you hover **Resume**, and smiles when you hover **Let's talk**. All motion switches off when the visitor has `prefers-reduced-motion` set.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The wavy hair outline in `character-paths.ts` was generated with a small Catmull-Rom + sine-offset script; edit `BACK_HAIR` and the locks if you want a different silhouette.
