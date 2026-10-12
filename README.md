@@ -30,3 +30,7 @@ Everything personal is in **`src/content/profile.ts`**: name, role, tagline, ema
 That difference in movement makes a flat drawing read as a head turning in 3D. The character also blinks at random intervals, breathes, looks around on its own after a few idle seconds, raises its brows when you hover **Resume**, and smiles when you hover **Let's talk**. All motion switches off when the visitor has `prefers-reduced-motion` set.
 
 The wavy hair outline in `character-paths.ts` was generated with a small Catmull-Rom + sine-offset script; edit `BACK_HAIR` and the locks if you want a different silhouette.
+
+## Deploy
+
+Deploys on Vercel with the default Next.js settings (Node 20.9+). For the contact form, add `RESEND_API_KEY`, `CONTACT_TO_EMAIL` and optionally `CONTACT_FROM_EMAIL` under **Project → Settings → Environment Variables**.
