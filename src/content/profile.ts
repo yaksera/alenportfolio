@@ -7,7 +7,7 @@ export type HairStyle = "long" | "short";
 export const profile = {
   name: "Alex",
   fullName: "Alex",
-  role: "Full-Stack Developer",
+  role: "Full-Stack Engineer",
   tagline: "Crafting modern full-stack web experiences with clean code, creative motion, and scalable digital architecture.",
   location: "Kathmandu, Nepal",
   email: "hello@example.com",
